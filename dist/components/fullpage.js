@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Slide = require('./slide');
 
 var scrollTo = require('../utils/scrollTo');
@@ -52,10 +53,10 @@ var Fullpage = function (_React$Component) {
   _createClass(Fullpage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      document.addEventListener('wheel', this.onScroll);
-      document.addEventListener('touchstart', this.onTouchStart);
-      document.addEventListener('touchend', this.onTouchEnd);
-      document.addEventListener('keydown', this.checkKey);
+      ReactDOM.findDOMNode(this).addEventListener('wheel', this.onScroll);
+      ReactDOM.findDOMNode(this).addEventListener('touchstart', this.onTouchStart);
+      ReactDOM.findDOMNode(this).addEventListener('touchend', this.onTouchEnd);
+      ReactDOM.findDOMNode(this).addEventListener('keydown', this.checkKey);
       window.addEventListener('resize', this.onResize);
       events.pub(this, this.scrollToSlide);
 
@@ -65,10 +66,10 @@ var Fullpage = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      document.removeEventListener('wheel', this.onScroll);
-      document.removeEventListener('touchstart', this.onTouchStart);
-      document.removeEventListener('touchend', this.onTouchEnd);
-      document.removeEventListener('keydown', this.checkKey);
+      ReactDOM.findDOMNode(this).removeEventListener('wheel', this.onScroll);
+      ReactDOM.findDOMNode(this).removeEventListener('touchstart', this.onTouchStart);
+      ReactDOM.findDOMNode(this).removeEventListener('touchend', this.onTouchEnd);
+      ReactDOM.findDOMNode(this).removeEventListener('keydown', this.checkKey);
       window.removeEventListener('resize', this.onResize);
     }
   }, {
