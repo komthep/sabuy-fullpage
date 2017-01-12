@@ -54,8 +54,8 @@ var Fullpage = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       ReactDOM.findDOMNode(this).addEventListener('wheel', this.onScroll);
-      ReactDOM.findDOMNode(this).addEventListener('touchstart', this.onTouchStart);
-      ReactDOM.findDOMNode(this).addEventListener('touchend', this.onTouchEnd);
+      // ReactDOM.findDOMNode(this).addEventListener('touchstart', this.onTouchStart);
+      // ReactDOM.findDOMNode(this).addEventListener('touchend', this.onTouchEnd);
       ReactDOM.findDOMNode(this).addEventListener('keydown', this.checkKey);
       window.addEventListener('resize', this.onResize);
       events.pub(this, this.scrollToSlide);
@@ -67,8 +67,8 @@ var Fullpage = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       ReactDOM.findDOMNode(this).removeEventListener('wheel', this.onScroll);
-      ReactDOM.findDOMNode(this).removeEventListener('touchstart', this.onTouchStart);
-      ReactDOM.findDOMNode(this).removeEventListener('touchend', this.onTouchEnd);
+      // ReactDOM.findDOMNode(this).removeEventListener('touchstart', this.onTouchStart);
+      // ReactDOM.findDOMNode(this).removeEventListener('touchend', this.onTouchEnd);
       ReactDOM.findDOMNode(this).removeEventListener('keydown', this.checkKey);
       window.removeEventListener('resize', this.onResize);
     }
@@ -157,23 +157,15 @@ var Fullpage = function (_React$Component) {
     key: 'onTouchEnd',
     value: function onTouchEnd(e) {
       var touchEnd = e.changedTouches[0].clientY;
-
       if (this.state.touchStart > touchEnd + Math.abs(this.state.touchSensitivity)) {
-
-        if (this.state.activeSlide == this.state.slidesCount - 1) {
-          // prevent down going down
-          return;
-        }
-
+        if (this.state.activeSlide == this.state.slidesCount - 1) return;
         return this.scrollToSlide(this.state.activeSlide + 1);
       }
 
-      if (this.state.activeSlide == 0) {
-        // prevent up going up
-        return;
+      if (this.state.activeSlide == 0) return;
+      if (this.state.touchStart < touchEnd - Math.abs(this.state.touchSensitivity)) {
+        this.scrollToSlide(this.state.activeSlide - 1);
       }
-
-      this.scrollToSlide(this.state.activeSlide - 1);
     }
   }, {
     key: 'onArrowClick',
